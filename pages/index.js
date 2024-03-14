@@ -1,12 +1,13 @@
-import { View, StyleSheet, Text, Image, TouchableOpacity, Modal } from "react-native";
-import { ModalTokens } from '../components/modal';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput } from "react-native";
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
+import { ModalTokens } from '../components/modal';
 
 export function Home() {
+    const [qtde, defineQtde] = useState(6);
+    const [telaModal, configTelaModal] = useState(false);
+    const [nome, setNome] = useState("");
 
-    const [qtde, defineQtde] = useState(6)
-    const [telaModal, configTelaModal] = useState(false)
     function gerarToken() {
         configTelaModal(true);
     }
@@ -17,30 +18,34 @@ export function Home() {
             <Text style={ESTILO.caracteres}>
                 {qtde} Caracteres
             </Text>
-
             <View style={ESTILO.area}>
-                <Slider style={{ height: 50 }}
+                <Slider
+                    style={{ height: 50 }}
                     minimumValue={6}
                     maximumValue={20}
-
                     minimumTrackTintColor="#ff0000"
                     maximumTrackTintColor="#000"
                     thumbTintColor="#392de9"
                     value={qtde}
                     onValueChange={(value) => defineQtde(value.toFixed(0))}
                 />
-
             </View>
-            <TouchableOpacity style={ESTILO.button} onPress={gerarToken}>
+            <TextInput
+                style={ESTILO.input}
+                onChangeText={(text) => setNome(text)}
+                value={nome}
+                placeholder="Digite seu nome"
+            />
+            <TouchableOpacity style={ESTILO.button} onPress={() => gerarToken(nome)}>
                 <Text style={ESTILO.buttonText}>
                     Gerar Senha
                 </Text>
             </TouchableOpacity>
             <Modal visible={telaModal} animationType="fade" transparent={true}>
-                <ModalTokens handleClose={() => configTelaModal(false)} />
+                <ModalTokens handleClose={() => configTelaModal(false)} nome={nome} />
             </Modal>
         </View>
-    )
+    );
 }
 
 const ESTILO = StyleSheet.create({
@@ -68,6 +73,7 @@ const ESTILO = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
+        marginTop: 20,
     },
     buttonText: {
         color: "#FFF"
@@ -75,5 +81,14 @@ const ESTILO = StyleSheet.create({
     caracteres: {
         fontSize: 30,
         fontWeight: "bold"
+    },
+    input: {
+        height: 40,
+        width: "80%",
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingLeft: 10,
+        marginTop: 20,
     }
-})
+});

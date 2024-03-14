@@ -37,7 +37,5 @@ export function Routes() {
                 }}
             />
         </Tab.Navigator>
-    )
-}
-
-
+  )
+            }
