@@ -21,8 +21,8 @@ export function Home() {
             <View style={ESTILO.area}>
                 <Slider
                     style={{ height: 50 }}
-                    minimumValue={6}
-                    maximumValue={20}
+                    minimumValue={0}
+                    maximumValue={5}
                     minimumTrackTintColor="#ff0000"
                     maximumTrackTintColor="#000"
                     thumbTintColor="#392de9"
@@ -38,7 +38,7 @@ export function Home() {
             />
             <TouchableOpacity style={ESTILO.button} onPress={() => gerarToken(nome)}>
                 <Text style={ESTILO.buttonText}>
-                    Gerar Senha
+                   confirmar avaliação
                 </Text>
             </TouchableOpacity>
             <Modal visible={telaModal} animationType="fade" transparent={true}>
@@ -56,7 +56,8 @@ const ESTILO = StyleSheet.create({
         alignItems: 'center'
     },
     logo: {
-        marginBottom: 60
+        marginBottom: 60,
+        
     },
     area: {
         marginBottom: 14,
@@ -67,7 +68,7 @@ const ESTILO = StyleSheet.create({
         padding: 8
     },
     button: {
-        backgroundColor: "#392de9",
+        backgroundColor: "#FF0000",
         width: "80%",
         height: 50,
         justifyContent: 'center',
